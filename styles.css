@@ -1,0 +1,12 @@
+.js-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+
+
+}
+.js-container img {
+  width: 250px;
+  margin: 25px;
+}
