@@ -1,20 +1,21 @@
 const apiKey = 'AIzaSyDB2rv_p72WbrIQErMhVCM61-QZb0TFEJ0';
+const endpointURL = "https://www.googleapis.com/youtube/v3/search";
 
 $(function(){
-  const endpointURL = "https://www.googleapis.com/youtube/v3/search";
 
   function getData(searchTerm, callback){
     const query={
       part:'snippet',
       key:apiKey,
-      q:searchTerm
+      q:searchTerm,
+      maxResults: 24
     }
     $.getJSON(endpointURL, query, callback);
   }
 
+
   function showThumbnail(data){
     let thumbnails = `<p>No Results</p>`;
-    console.log(data);
     if (data.items) {
       thumbnails = data.items.map(function(item){
         if(item.id.kind === "youtube#channel") {
@@ -28,8 +29,14 @@ $(function(){
 
     $('.js-container').append(thumbnails);
   }
-  $('.search-form').on('click', 'button', function(event) {
+  $('.search-form').submit(function(event) {
     event.preventDefault();
+    if ($('.search-form').hasClass('at-top')) {
+      $('.search-form, .logo').toggleClass('')
+    } else {
+      $('.search-form, .logo').toggleClass('at-top')
+    }
+
     $('.js-container').empty();
     let searchTerm = $('#search-box').val();
       getData(searchTerm, showThumbnail);
