@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css?family=Fjalla+One|Montserrat|Roboto+Condensed");
+.uppercase {
+  text-transform: uppercase; }
+
+.js-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center; }
+
+.js-container img {
+  width: 250px;
+  margin: 25px; }
+
+a {
+  text-decoration: none; }

@@ -12,19 +12,21 @@ $(function(){
     $.getJSON(endpointURL, query, callback);
   }
 
-
-
-
   function showThumbnail(data){
     let thumbnails = `<p>No Results</p>`;
+    console.log(data);
+    if (data.items) {
+      thumbnails = data.items.map(function(item){
+        if(item.id.kind === "youtube#channel") {
+          return `<a target="_blank" href="https://www.youtube.com/channel/${item.id.channelId}"><img src=" ${item.snippet.thumbnails.high.url} " /></a>`
+        } else {
+          return `<a target="_blank" href="https://www.youtube.com/watch?v=${item.id.videoId}"><img src=" ${item.snippet.thumbnails.high.url} " /></a>`
+        }
 
-    thumbnails = data.items.map(function(item){
-      return `<img src=" ${item.snippet.thumbnails.high.url} " />`
-    })
+      })
+    }
+
     $('.js-container').append(thumbnails);
-  }
-  function clickListener() {
-
   }
   $('.search-form').on('click', 'button', function(event) {
     event.preventDefault();
