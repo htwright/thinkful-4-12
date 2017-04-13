@@ -16,12 +16,13 @@ $(function(){
 
   function showThumbnail(data){
     let thumbnails = `<p>No Results</p>`;
+    console.log(data);
     if (data.items) {
       thumbnails = data.items.map(function(item){
         if(item.id.kind === "youtube#channel") {
-          return `<a target="_blank" href="https://www.youtube.com/channel/${item.id.channelId}"><img src=" ${item.snippet.thumbnails.high.url} " /></a>`
+          return `<div class="video-container"><a target="_blank" href="https://www.youtube.com/channel/${item.id.channelId}"><img src=" ${item.snippet.thumbnails.high.url} " /></a><p class='video-title'>${item.snippet.title}</p></div>`
         } else {
-          return `<a target="_blank" href="https://www.youtube.com/watch?v=${item.id.videoId}"><img src=" ${item.snippet.thumbnails.high.url} " /></a>`
+          return `<div class="video-container"><a target="_blank" href="https://www.youtube.com/watch?v=${item.id.videoId}"><img src=" ${item.snippet.thumbnails.high.url} " /></a><p class='video-title'>${item.snippet.title}</p></div>`
         }
 
       })
